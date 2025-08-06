@@ -108,24 +108,7 @@ router.post("/forgot-password", async (req, res) => {
 
   await sendOTP(email, otp);
   res.json({ message: "OTP sent to your email" });
-});
-
-// ================= RESET PASSWORD =================
-router.post("/reset-password", async (req, res) => {
-  const { email, otp, newPassword } = req.body;
-  const user = await User.findOne({ email });
-
-  if (!user) return res.status(404).json({ message: "User not found" });
-  if (user.otp !== otp || Date.now() > user.otpExpires)
-    return res.status(400).json({ message: "Invalid or expired OTP" });
-
-  user.password = await bcrypt.hash(newPassword, 10);
-  user.otp = null;
-  user.otpExpires = null;
-  await user.save();
-
-  res.json({ message: "Password reset successful" });
-});
+})
 
 // ================= LOGOUT =================
 router.post("/logout", authMiddleware, async (req, res) => {
@@ -139,4 +122,4 @@ router.post("/logout", authMiddleware, async (req, res) => {
   res.json({ message: "Logged out successfully" });
 });
 
-export default router;
+export default router;     
