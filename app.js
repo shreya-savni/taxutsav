@@ -3,6 +3,10 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cors from "cors";
 import authRoutes from "./routes/authRoutes.js";
+import bookingRoutes from "./routes/bookingRoutes.js";
+import quotationRoutes from "./routes/quotationRoutes.js";
+import chatRoutes from "./routes/chatRoutes.js";
+import itrRoutes from "./routes/itrRoutes.js";
 
 dotenv.config();
 const app = express();
@@ -14,7 +18,11 @@ mongoose
   .then(() => console.log("MongoDB connected"))
   .catch((err) => console.log(err));
 
-app.use("/api/user", authRoutes);
+app.use("/api/auth", authRoutes);
+app.use("/api/booking", bookingRoutes);
+app.use("/api/quotation", quotationRoutes);
+app.use("/api/chat", chatRoutes); // ? Chat routes already use controllers
+app.use("/api/itr", itrRoutes);
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
