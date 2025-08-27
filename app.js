@@ -6,7 +6,7 @@ import authRoutes from "./routes/authRoutes.js";
 import bookingRoutes from "./routes/bookingRoutes.js";
 import quotationRoutes from "./routes/quotationRoutes.js";
 import chatRoutes from "./routes/chatRoutes.js";
-import naturePaymentRoutes from "./routes/naturePaymentRoutes.js";
+import naturePaymentRoutes from "./routes/NaturePaymentRoutes.js";
 import tdsRoutes from './routes/tdsRoutes.js';
 
 dotenv.config();
