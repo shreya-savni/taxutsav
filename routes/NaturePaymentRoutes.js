@@ -1,4 +1,3 @@
-// routes/naturePaymentRoutes.js
 import express from "express";
 import { getNaturePayments, getNaturePaymentById } from "../controllers/naturePaymentController.js";
 

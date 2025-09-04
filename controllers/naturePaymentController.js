@@ -1,4 +1,3 @@
-// controllers/naturePaymentController.js
 import NaturePayment from "../models/NaturePayment.js";
 
 // Get ALL sections

@@ -6,7 +6,7 @@ const NaturePaymentSchema = new mongoose.Schema({
         required: true,
         unique: true,
     },
-    descriptions: {   // <-- plural array
+    descriptions: {
         type: [String],
         required: true,
     },

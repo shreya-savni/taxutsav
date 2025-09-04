@@ -17,7 +17,7 @@ const tdsSchema = new mongoose.Schema({
         }
     ],
 
-    effectiveFy: { type: String, required: true }, // e.g. "2025-26"
+    effectiveFy: { type: String, required: true },
     rate: { type: Number, required: true },
     panAvailable: { type: Boolean, required: true },
     payerType: { type: String, enum: ["individual", "others"], required: true },
