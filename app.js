@@ -1,9 +1,18 @@
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
+<<<<<<< HEAD
 import path from "path";
 import { fileURLToPath } from "url";
 import { connectDB } from "./config/db.js";
+=======
+import authRoutes from "./routes/authRoutes.js";
+import bookingRoutes from "./routes/bookingRoutes.js";
+import quotationRoutes from "./routes/quotationRoutes.js";
+import chatRoutes from "./routes/chatRoutes.js";
+import naturePaymentRoutes from "./routes/NaturePaymentRoutes.js";
+import tdsRoutes from './routes/tdsRoutes.js';
+>>>>>>> personal/main
 
 // Import Routes
 import userRoutes from "./routes/userRoutes.js";
