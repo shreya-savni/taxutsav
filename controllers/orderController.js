@@ -60,8 +60,9 @@ export const verifyPaymentRedirect = async (req, res) => {
             .digest("hex");
 
         if (expectedSignature !== razorpay_signature) {
-            return res.redirect("/payment-failed"); // frontend route
+            return res.status(400).json({ status: "Invalid signature" });
         }
+
 
         // ✅ Update order status in DB
         const order = await Order.findOne({ razorpay_order_id });

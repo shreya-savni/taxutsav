@@ -1,51 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>Razorpay Payment</title>
 </head>
-
 <body>
-  <h1>Test Razorpay Payment (Redirect Flow)</h1>
+  <h1>Razorpay Test Payment</h1>
   <button id="payBtn">Pay Now</button>
 
   <script>
+    const razorpayKey = "rzp_live_RByqj3nijdVw0J";
+    const userToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4OWUxNTJhMjQzYmUxNDdhMmMwMWY0MSIsImlhdCI6MTc1Njk2OTg3MywiZXhwIjoxNzU3MDU2MjczfQ.JR-QhCCtrc8Ebzn513FZmBz4naceTWq7hFoPwniQYVM";
+
     document.getElementById("payBtn").addEventListener("click", async () => {
-      try {
-        // 1︝⃣ Create Order from backend
-        const response = await fetch("https://taxutsav-ya03.onrender.com/api/orders/create-order", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODk5YmUyMWEyNzU0NWEwNTgyMThhZWUiLCJpYXQiOjE3NTY4MzQ2MjksImV4cCI6MTc1NjkyMTAyOX0.L18yylG3T79_1_hQR-FoVMEoKRkc6LJji4HeXHS0yPk`, // <-- send your login token here
-          },
-          body: JSON.stringify({
-            items: [
-              { name: "ITR Filing", description: "45 min expert advice", price: 500, quantity: 1 }
-            ],
-            paymentMethod: "upi",
-          }),
-        });
+      const response = await fetch("/api/orders/create-order", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer " + userToken
+        },
+        body: JSON.stringify({
+          items: [
+            { name: "ITR Filing", description: "45 min advice", price: 500, quantity: 1 }
+          ],
+          paymentMethod: "upi"
+        })
+      });
 
-        const data = await response.json();
-        if (!data.order) {
-          alert("Failed to create order");
-          return;
-        }
-
-        // 2︝⃣ Redirect user to Razorpay Hosted Checkout Page
-        const razorpayKey = "<%= process.env.RAZORPAY_KEY_ID %>"; // injected by EJS
-        const checkoutUrl =
-          `https://api.razorpay.com/v1/checkout/embedded?key_id=${razorpayKey}&order_id=${data.order.razorpayOrderId}&redirect=true`;
-
-        window.location.href = checkoutUrl; // 🔴 Important: redirect instead of rzp.open()
-      } catch (err) {
-        console.error("Payment Error:", err);
-        alert("Something went wrong");
+      const data = await response.json();
+      if (!data.order) {
+        alert("Failed to create order");
+        return;
       }
-    });
-  </script>
-</body>
 
+      // Razorpay hosted checkout
+      const checkoutUrl =
+      `https://api.razorpay.com/v1/checkout/embedded?key_id=${razorpayKey}&order_id=${data.order.razorpayOrderId}&redirect=true`;
+
+    window.location.href = checkoutUrl;
+  });
+</script>
+</body>
 </html>
