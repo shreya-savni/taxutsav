@@ -1,4 +1,3 @@
-// controllers/transactionController.js
 import Transaction from "../models/Transaction.js";
 import Order from "../models/Order.js";
 import razorpay from "../utils/razorpay.js";
@@ -66,7 +65,7 @@ export const createTransaction = async (req, res) => {
             try {
                 // Call Razorpay refund API
                 const refund = await razorpay.payments.refund(order.razorpay_payment_id, {
-                    amount: amount * 100, // amount in paise
+                    amount: amount * 100, 
                 });
                 status = "success";
                 refundId = refund.id;
@@ -108,11 +107,11 @@ export const createTransaction = async (req, res) => {
 export const getTransactions = async (req, res) => {
     try {
         const userId = req.user.userId;
-        const { type, status } = req.query; // optional filters
+        const { type, status } = req.query; 
 
         let filter = { userId };
-        if (type) filter.type = type;       // credit or debit
-        if (status) filter.status = status; // pending, success, failed
+        if (type) filter.type = type;       
+        if (status) filter.status = status; 
 
         const transactions = await Transaction.find(filter).sort({ createdAt: -1 });
 
