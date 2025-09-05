@@ -3,7 +3,7 @@ import crypto from "crypto";
 import razorpay from "../utils/razorpay.js";
 
 // ============================
-// ✅ Create Razorpay Order
+//  Create Razorpay Order
 // ============================
 export const createOrder = async (req, res) => {
     try {
@@ -45,14 +45,14 @@ export const createOrder = async (req, res) => {
 };
 
 // ============================
-// ✅ Verify Payment (Redirect flow)
+//  Verify Payment (Redirect flow)
 // ============================
 export const verifyPaymentRedirect = async (req, res) => {
     try {
         const { razorpay_payment_id, razorpay_order_id, razorpay_signature } =
             req.body;
 
-        // 🔝 Generate expected signature
+        // ?? Generate expected signature
         const body = razorpay_order_id + "|" + razorpay_payment_id;
         const expectedSignature = crypto
             .createHmac("sha256", process.env.RAZORPAY_KEY_SECRET)
@@ -64,7 +64,7 @@ export const verifyPaymentRedirect = async (req, res) => {
         }
 
 
-        // ✅ Update order status in DB
+        //  Update order status in DB
         const order = await Order.findOne({ razorpay_order_id });
         if (!order) {
             return res.redirect("/payment-failed");
@@ -83,7 +83,7 @@ export const verifyPaymentRedirect = async (req, res) => {
 };
 
 // ============================
-// ✅ Get Orders (User’s Orders)
+//  Get Orders (User�s Orders)
 // ============================
 export const getOrders = async (req, res) => {
     try {
