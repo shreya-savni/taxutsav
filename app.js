@@ -5,11 +5,6 @@ import path from "path";
 
 import { fileURLToPath } from "url";
 import { connectDB } from "./config/db.js";
-<<<<<<< HEAD
-=======
-
-
->>>>>>> personal/main
 
 import userRoutes from "./routes/userRoutes.js";
 import bookingRoutes from "./routes/bookingRoutes.js";
