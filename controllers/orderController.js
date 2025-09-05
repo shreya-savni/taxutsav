@@ -1,11 +1,5 @@
-<<<<<<< HEAD
-import Order from "../models/Order.js";
-
-
-=======
-
 import Order from "../models/order.js";
->>>>>>> personal/main
+
 import crypto from "crypto";
 import razorpay from "../utils/razorpay.js";
 
@@ -90,7 +84,7 @@ export const verifyPaymentRedirect = async (req, res) => {
 };
 
 // ============================
-//  Get Orders (User’s Orders)
+//  Get Orders (Userâ€™s Orders)
 // ============================
 export const getOrders = async (req, res) => {
     try {
