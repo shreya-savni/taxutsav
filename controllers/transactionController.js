@@ -1,4 +1,4 @@
-import Transaction from "../models/Transaction.js";
+import Transaction from "../models/transaction.js";
 import Order from "../models/Order.js";
 import razorpay from "../utils/razorpay.js";
 
